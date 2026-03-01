@@ -1,0 +1,46 @@
+Rough functional specification. Design and code an Android app that displays infor-
+mation about movies. The app’s main activity displays a grid whose cells contain a thumbnail
+picture of a movie poster above the title of the movie. For instance, a grid cell could contain a
+thumbnail showing a poster of the movie “Stranger than Fiction” above the title of the movie.
+Feel free to choose how to fit the pictures into thumbnails appearing in your grid view (e.g.
+whether to scale the picture or not) but make sure not to alter the aspect ratio of the poster.
+Make sure that thumbnails are separated by thin spaces (no more than 10 dp) uniformly on all
+four sides when the grid is displayed on a Pixel 9 device. Also, size the thumbnails appropriately,
+e.g., using 2 or 3 columns in portrait mode. You must include enough thumbnails to fill at least
+most of a Pixel’s display with your picture grid (i.e., at least 8 cells if using two columns).
+Each grid cell supports two kinds of functionality, depending on whether an app viewer
+performs a short vs. a long click on the cell. A short click brings up a new activity that shows
+the entire poster of the selected movie on the entire device display. This picture must be a higher
+resolution and bigger than the thumbnail displayed for the same movie in the grid activity. The
+user can return to the grid view by selecting the “back” soft button on the phone. If, instead,
+a user clicks anywhere on the displayed picture, you must open a browser activity showing the
+iMDB page of the selected movie. For instance, if your app shows a poster of the movie “Stranger
+than Fiction” , your app should bring up the iMDB web page of the movie.
+A long click on a grid cell of the main activity brings up a “context menu” showing the
+following three options for the car under consideration: (1) View the entire movie poster (similar
+to a short click); (2) Show the Rotten Tomatoes page for the movie; and (3) bring up a l web
+page of streaming service (e.g., Amazon Prime, Netflix, etc.) where the movie can be purchased.
+Project deliverables. You are required to use at least two LLMs for this assignment. You
+are responsible for the following items.
+1. A refined spec for your project. In the refined spec, make sure to spell out the formatting
+of grid cells (e.g., whether square or oblong) and of the overall grid (e.g., the number of
+movies and colums in the grid).
+2. The Java code for implementing the app. This code must comply with your refined spec.
+3. A brief prerecorded video in which you explain how your code works. The maximum
+duration of the video is 180 seconds.
+4. A short report (less than 1 page) on your use of LLMs. What LLMs did you use? For
+what purpose did you use LLMs (e.g., code generation vs. spec refinement)? How accurate
+were the results you received from your prompts?
+Your submission will be graded according to the following criteria:
+1. The completeness of the specs.
+2. Code compliance with your specs.
+3. Accuracy of your video
+4. Ability to use LLMs effectively and assess LLM results
+Android platform. For this project use a Pixel 9 AVD running Android 16–API 36 that
+you downloaded for Homework 1. You are not required to provide backward compatibility with
+previous Android versions. Make sure that your app displays best in portrait mode; you are not
+required to support landscape mode.
+Submission instructions. You must work alone on this project. Submit all four deliver-
+ables as a single zip archive using the submission link in the assignment’s page on Blackboard.
+Your app code should be in a zip file contained in the project archive. No late submissions will
+be accepted.
