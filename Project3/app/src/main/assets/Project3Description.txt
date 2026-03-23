@@ -1,0 +1,44 @@
+Design and code two new Android apps, A1 and A2 meant to work together on an Android
+phone or tablet running version Android 16 (API level 36). The first app helps visitors in
+Chicago decide on points of interest in the city. The second app has specific information about
+the points of interest.
+
+
+1. App A1 defines an activity containing two read-only text views and two buttons. The
+buttons, when selected, will first show a short toast message, then broadcast two different
+implicit intents (e.g., attractions and restaurants) depending on the button pressed. The
+text views describe the meaning of the buttons to the device user.
+
+
+2. Application A2 receives the intents. Depending on the kind of intent that was received,
+A2 will launch one of two activities. The first activity (attractions) displays information
+about 5 points of interest in the city of Chicago, Illinois (e.g., the Lincoln Park Zoo, Navy
+Pier, the Museum of Science and Indutry, the Art Institute, the TILT!, etc.) The second
+activity shows at least 5 restaurants located within Chicago's city limits. Both activities
+contain two fragments, whose behavior is described below. In addition, application A2
+maintains an options menu and an action bar. The action bar shows the name of the
+application (your choice) and the overflow area. The options menu allows a device user to
+switch between attractions and restaurants. This menu should be clearly accessible from
+the overflow area.
+
+
+Each of the two activities in A2 contains two fragments. The first fragment displays a list
+(either the attractions or the restaurants, depending on the activity). The device user may
+select any item from either list; the currently selected item will stay highlighted until another
+item is selected. The second fragment shows the official web site of the highlighted item using
+a WebView widget.
+
+
+Your apps should display optimally in landscape mode. You need not make provisions to
+display the apps differently in portrait mode. Regardless of the mode, the activities in A2
+initially show only the first fragment across the entire width of the screen. As soon as a user
+selects an item, the first fragment is "shrunk" to about 1/3 of the screen's width. This fragment
+will appear in the left-hand side of the screen, with the second fragment taking up the remaining
+2/3 of the display on the right. Pressing the "back" button will return the activity to its initial
+configuration. The action bar should be displayed at all times regardless of whether the device
+is in portrait or landscape mode.
+
+Finally, the state of application A2 should be retained across device reconfigurations, e.g.,
+when the device is switched from landscape to portrait mode and vice versa. This means that
+the selected list item (in the first fragment) and the page displayed in the second fragment will
+be kept during configuration changes.

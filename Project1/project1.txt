@@ -1,0 +1,50 @@
+Rough functional specification. Design and implement an app with the following functionality. The app starts off with a main activity containing a welcome text and two buttons.
+The two buttons are arranged vertically (i.e., with button 1 above button 2) when the device is
+in portrait mode and horizontally (i.e., with button 1 to the left of button 2) when the device is
+in landscape mode. Either way, the welcome text is centered in the display above the buttons.
+The first button opens a new activity in which a user can enter a phone number, whose
+format is either without punctuation (as in 3125551212) or using parentheses, an optional space
+and a mandatory dash to separate the various groups of digits (e.g., as in (312) 555-1212). No
+other formats are accepted.
+
+
+The second activity must check that the number entered by the user is in one of the two legal
+formats. The activity returns a result code to the first activity indicating whether a number
+is the proper format was entered. If a proper number was entered, the first activity opens the
+existing Phone app built-in the mobile device and displays the number that was entered by the
+user, but without making the call.
+Use toast messages, e.g., to indicate that the phone number entered by the user was not in
+a legal format or that the user did not conform to the button pressing protocol above.
+Project deliverables. You are required to use at least two LLMs for this assignment. You
+are responsible for the following items.
+1. A refined spec for your project. In the refined spec, make sure to spell out the exact syntax
+behavior of your app, especially in corner cases (e.g., an incorrect number entered or the
+second button pressed before the first button)
+2. The Java code for implementing the app. This code must comply with your refined spec.
+3. A brief prerecorded video in which you explain how your code works. The maximum
+duration of the video is 180 seconds.
+4. A short report (less than 1 page) on your use of LLMs. What LLMs did you use? For
+what purpose did you use LLMs (e.g., code generation vs. spec refinement)? How accurate
+were the results you received from your prompts?
+
+
+Your submission will be graded according to the following criteria:
+1. The completeness of the specs.
+2. Code compliance with your specs.
+3. Accuracy of your video
+4. Ability to use LLMs effectively and assess LLM results
+Implementation notes. Create an instance of the Toast class with the static message
+makeText(), which takes as input 3 arguments. You can then display the toast by calling
+method show() on the instance. See the online documentation for additional details.
+Use the QUERY_ALL_PACKAGES permission to allow your app to access the Phone app on the
+device. Use an EditText widget to enter the number in the second activity. When defining a
+listener for the edit text, implement Java interface TextView.OnEditorActionListener . Read
+the Android documentation on the TextView class in order to define the listener.
+Android platform. For this project use a Pixel 9 AVD running Android 16–API 36 that
+you downloaded for Homework 1. You are not required to provide backward compatibility with
+previous Android versions.
+
+
+Submission instructions. You must work alone on this project. Submit the entire Studio
+project as a zip archive using the submission link in the assignment’s page on Blackboard. No
+late submissions will be accepted.

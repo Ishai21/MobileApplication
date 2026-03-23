@@ -1,0 +1,7 @@
+edu.cs478.project1.phoneformat.app-pngs-0 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/build/generated/res/pngs/debug
+edu.cs478.project1.phoneformat.app-resValues-1 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/build/generated/res/resValues/debug
+edu.cs478.project1.phoneformat.app-mergeDebugResources-2 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+edu.cs478.project1.phoneformat.app-mergeDebugResources-3 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+edu.cs478.project1.phoneformat.app-debug-4 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/build/intermediates/merged_res/debug/mergeDebugResources
+edu.cs478.project1.phoneformat.app-debug-5 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/src/debug/res
+edu.cs478.project1.phoneformat.app-main-6 /Users/irfanshaik/Desktop/CS-478/Project1/PhoneFormatApp/app/src/main/res

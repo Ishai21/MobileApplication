@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Phone Format Checker</string>
+
+    <string name="welcome">Welcome! Enter a phone number, then open the Phone app.</string>
+    <string name="welcome_with_number">Welcome! Saved number: %1$s</string>
+
+    <string name="btn_enter_phone">Enter phone number</string>
+    <string name="btn_open_dialer">Open Phone app</string>
+
+    <string name="phone_entry_instructions">Enter a phone number in one of the legal formats:</string>
+    <string name="phone_entry_hint">3125551212  or  (312) 555-1212</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="toast_invalid_format">Illegal format. Use 3125551212 or (312) 555-1212.</string>
+    <string name="toast_protocol_enter_first">Please enter a valid phone number first.</string>
+    <string name="toast_saved_number">Saved: %1$s</string>
+    <string name="toast_no_number_saved">No number saved.</string>
+    <string name="toast_invalid_return">Unexpected result from entry screen.</string>
+    <string name="toast_no_phone_app">No Phone/Dialer app found.</string>
+
+</resources>

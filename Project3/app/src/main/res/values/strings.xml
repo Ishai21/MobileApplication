@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Chicago Guide</string>
+    <string name="desc_attractions">Open the attractions list and official websites for Chicago points of interest.</string>
+    <string name="desc_restaurants">Open the restaurants list and official websites for Chicago dining.</string>
+    <string name="button_attractions">View attractions</string>
+    <string name="button_restaurants">View restaurants</string>
+    <string name="toast_attractions">Opening attractions...</string>
+    <string name="toast_restaurants">Opening restaurants...</string>
+    <string name="screen_title_attractions">Chicago Guide - Attractions</string>
+    <string name="screen_title_restaurants">Chicago Guide - Restaurants</string>
+    <string name="menu_attractions">Attractions</string>
+    <string name="menu_restaurants">Restaurants</string>
+    <string name="content_description_list">List of places</string>
+</resources>

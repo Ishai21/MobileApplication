@@ -1,0 +1,202 @@
+Project 2: Movie Poster Browser
+Refined Functional Specification
+
+1. Overview
+This Android application displays information about a fixed set of nine animated movies using a grid of movie poster thumbnails. The main screen shows a grid where each cell contains a thumbnail of the movie poster above the movie title. Short taps and long presses on a grid cell provide different behaviors: showing a full-screen poster or opening external web pages (IMDb, Rotten Tomatoes, and a streaming/purchase site).
+
+Target device: Pixel 9 AVD, Android 16 (API 36), portrait mode only.
+All layout decisions below are made and tested with this target in mind.
+
+2. Movie Set and Data
+The app uses exactly nine movies, in the fixed order below. All logic (grid position, context menu, and external links) assumes this order:
+
+1) Kung Fu Panda (2008)
+2) Avatar (2009)
+3) The Lion King (1994)
+4) How to Train Your Dragon (2010)
+5) Toy Story (1995)
+6) Monsters, Inc. (2001)
+7) Ice Age (2002)
+8) Shrek (2001)
+9) Cars (2006)
+
+For each movie, the following data is defined in code:
+- Movie title (String)
+- Local drawable resource for the poster image (int, R.drawable.*)
+- Rotten Tomatoes URL (String)
+- IMDb URL (String)
+- Streaming/Purchase URL (String)
+
+The URLs are exactly those listed in Links.txt, and the app stores them in arrays in the same order as the movie list above. For any given grid position i (0–8), the Rotten Tomatoes, IMDb, and streaming URLs at index i correspond to the movie at index i.
+
+3. Overall Layout and Grid Formatting
+3.1 Main Activity Layout
+- The launcher activity is MainActivity.
+- Its layout is defined in activity_main.xml.
+- The root view is a FrameLayout containing a GridView that occupies the full available width and height (match_parent for both dimensions).
+
+3.2 Grid Configuration
+The GridView is configured as follows:
+- Number of columns: exactly 2 columns in portrait mode.
+- Vertical spacing between grid cells: 6 dp.
+- Horizontal spacing between grid cells: 6 dp.
+- Padding around the grid content: 6 dp on all sides.
+- Gravity: center.
+- Stretch mode: columnWidth (so columns share available width).
+
+This configuration produces a grid that fills most of the Pixel 9 portrait display with two poster-like columns and multiple rows.
+
+3.3 Grid Cell Formatting
+Each grid cell is defined by the layout file grid_item_movie.xml and is visually composed as:
+- Container: A vertical LinearLayout with:
+  - layout_width = match_parent (within the column)
+  - layout_height = wrap_content
+  - orientation = vertical
+  - layout_margin = 6 dp
+  - gravity = center_horizontal
+
+- Poster thumbnail:
+  - View type: ImageView (id: imageViewPosterThumb)
+  - layout_width = match_parent
+  - layout_height = 0 dp with layout_weight = 4
+  - adjustViewBounds = true
+  - scaleType = centerCrop
+  - contentDescription = app_name
+
+  Interpretation:
+  - The cell is intentionally poster-like: it is taller than it is wide.
+  - The ImageView uses centerCrop to fill its vertical space while preserving aspect ratio, so the poster is not distorted. If necessary, edges are cropped so that the thumbnail fits into the cell without changing aspect ratio.
+
+- Movie title:
+  - View type: TextView (id: textViewTitle)
+  - layout_width = match_parent
+  - layout_height = wrap_content
+  - layout_marginTop = 4 dp
+  - gravity = center
+  - maxLines = 2
+  - ellipsize = end
+  - textSize = 14 sp
+  - textColor = black
+
+Therefore:
+- Each grid cell is an oblong (poster-like) vertical block: large poster thumbnail on top, movie title centered underneath.
+- Cells are uniformly separated by approximately 6 dp margins and grid spacing on all four sides on the Pixel 9 device.
+
+4. Images and Drawable Resources
+Each movie uses a local drawable resource for its poster. The app expects the following resource names (file extensions are managed by Android; resources are referenced via R.drawable.*):
+
+- Kung Fu Panda:        R.drawable.kung_fu_panda
+- Avatar:              R.drawable.avatar
+- The Lion King:       R.drawable.the_lion_king
+- How to Train Your Dragon: R.drawable.how_to_train_your_dragon
+- Toy Story:           R.drawable.toy_story
+- Monsters, Inc.:      R.drawable.monsters_inc
+- Ice Age:             R.drawable.ice_age
+- Shrek:               R.drawable.shrek
+- Cars:                R.drawable.cars
+
+These drawables can be WebP or another Android-supported image format; they are placed in res/drawable/ and are used as follows:
+- Thumbnails in the main grid use these same resources with centerCrop.
+- The full-poster view uses the same drawable, displayed with fitCenter to show the entire image.
+
+5. Behavior and Interaction
+5.1 Main Screen (Grid of Movies)
+- The main screen is implemented in MainActivity.
+- MainActivity sets content view to activity_main.xml and initializes the GridView with a custom adapter (MovieGridAdapter).
+- The adapter binds:
+  - Movie title (String)
+  - Poster drawable resource id
+to each grid cell.
+
+5.1.1 Short Click on a Grid Cell
+When the user performs a short click (tap) on any grid cell:
+- The app launches PosterActivity via an explicit Intent.
+- It passes, via Intent extras:
+  - EXTRA_TITLE: the movie title
+  - EXTRA_IMAGE_RES_ID: the drawable resource id of the selected poster
+  - EXTRA_IMDB_URL: the IMDb URL for that movie
+- No browser is opened at this point; only the full poster activity is shown.
+
+5.1.2 Long Click on a Grid Cell (Context Menu)
+When the user performs a long click (long press) on any grid cell:
+- The GridView is registered for a context menu in MainActivity.
+- A standard context menu appears with a header and three items:
+  - Header: the title of the selected movie.
+  - Menu options:
+    1) "View full poster"
+    2) "Open Rotten Tomatoes"
+    3) "Open streaming site"
+
+Behavior for each menu item:
+1) View full poster
+   - Opens PosterActivity for the selected movie (same effect as a short click).
+
+2) Open Rotten Tomatoes
+   - Opens the Rotten Tomatoes URL for that movie in the system browser (via ACTION_VIEW Intent).
+
+3) Open streaming site
+   - Opens the streaming/purchase URL for that movie in the system browser (via ACTION_VIEW Intent).
+
+If no browser or capable app is available to handle the Intent, the app shows a short Toast message indicating that the request cannot be handled.
+
+5.2 Poster Screen (Full Poster Activity)
+- The full poster screen is implemented in PosterActivity.
+- Its layout is defined in activity_poster.xml:
+  - Root: FrameLayout with match_parent width and height.
+  - Child: ImageView (id: imageViewPosterFull) with:
+    - layout_width = match_parent
+    - layout_height = match_parent
+    - adjustViewBounds = true
+    - scaleType = fitCenter
+    - contentDescription = app_name
+
+Behavior:
+- On creation, PosterActivity:
+  - Reads the Intent extras passed from MainActivity.
+  - Sets the activity title to the movie title (if provided).
+  - Sets the ImageView to display the poster drawable resource.
+  - Uses fitCenter so the entire poster is visible onscreen without cropping (possibly with letterboxing).
+
+- Tap on the full-screen poster:
+  - When the ImageView is clicked, the app opens the IMDb URL (EXTRA_IMDB_URL) in the system browser via an ACTION_VIEW Intent.
+  - If no browser is available, a Toast is shown indicating the failure.
+
+- Back navigation:
+  - Pressing the system Back button returns the user to the main grid in MainActivity.
+
+6. External Links and URL Mapping
+For each movie, three URLs are defined and used as follows:
+- Rotten Tomatoes URL: accessed via the long-press context menu on the main grid.
+- IMDb URL: accessed when the full-screen poster is tapped (short-click follows grid → poster, then tap on poster).
+- Streaming/Purchase URL: accessed via the long-press context menu on the main grid.
+
+All URLs are hard-coded in arrays in MainActivity, with element i for each array corresponding to the movie at index i in the MOVIE_TITLES array. The concrete URLs match those in Links.txt:
+- Kung Fu Panda: Rotten Tomatoes, IMDb, Amazon purchase/streaming link.
+- Avatar: Rotten Tomatoes, IMDb, Disney+ link.
+- The Lion King: Rotten Tomatoes, IMDb, Disney+ link.
+- How to Train Your Dragon: Rotten Tomatoes, IMDb, Amazon link.
+- Toy Story: Rotten Tomatoes, IMDb, Disney+ link.
+- Monsters, Inc.: Rotten Tomatoes, IMDb, Disney+ link.
+- Ice Age: Rotten Tomatoes, IMDb, Disney+ link.
+- Shrek: Rotten Tomatoes, IMDb, Amazon link.
+- Cars: Rotten Tomatoes, IMDb, Disney+ link.
+
+7. Platform and Technical Assumptions
+- Android version: Target SDK 36 (Android 16) on a Pixel 9 AVD.
+- Minimum SDK: 28.
+- Orientation: Designed and tested primarily for portrait mode; landscape support is not required.
+- Language: All app logic is implemented in Java (no Kotlin code in the app implementation).
+- UI toolkit: Classic Android Views (GridView, ImageView, TextView, etc.), not Jetpack Compose.
+
+8. Summary of Key Formatting Decisions
+- Grid uses exactly 2 columns on Pixel 9 in portrait.
+- Each grid cell is oblong/poster-like: a tall image area with a small title area below.
+- Thumbnails in the grid:
+  - Maintain poster aspect ratio.
+  - May crop edges (centerCrop) to fill their allocated space without distortion.
+- Full-screen poster view:
+  - Maintains complete image with fitCenter (no cropping).
+  - May show letterboxing if needed to preserve aspect ratio.
+
+This refined specification fully describes the layout, formatting, data, and behavior of the app so that the Java implementation can be validated against it.
+

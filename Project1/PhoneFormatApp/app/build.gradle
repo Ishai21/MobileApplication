@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "edu.cs478.project1.phoneformat"
+        minSdkVersion 36
+        targetSdkVersion 36
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+        debug {
+            applicationIdSuffix ""
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    namespace = 'edu.cs478.project1.phoneformat'
+}
+dependencies {
+}
